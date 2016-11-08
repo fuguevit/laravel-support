@@ -1,0 +1,44 @@
+{
+  "name": "fuguevit/laravel-support",
+  "type": "library",
+  "description": "Add common helpers, traits, view share for laravel development.",
+  "license": "MIT",
+  "homepage": "http://www.fuguevit.com",
+  "keywords": ["support","helper","view share","laravel"],
+  "authors": [
+    {
+      "name": "Frank Wang",
+      "email": "wangxuan@188.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.4",
+    "illuminate/support": "~5.2.0|~5.3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.*",
+    "orchestra/testbench": "3.2.x-dev",
+    "orchestra/database": "3.2.x-dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fuguevit\\Support\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Fuguevit\\Support\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "component": "package",
+    "branch-alias": {
+      "dev-master": "0.x-dev"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
