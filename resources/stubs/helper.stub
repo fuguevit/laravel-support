@@ -1,0 +1,15 @@
+<?php
+
+namespace helper_namespace;
+
+/**
+ * Class helper_class
+ * @package helper_namespace
+ */
+class helper_class
+{
+    public static function test()
+    {
+        // TODO add function body, remember to change function name
+    }
+}

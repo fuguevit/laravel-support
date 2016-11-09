@@ -11,7 +11,7 @@ class SupportServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
     }
 
     /**

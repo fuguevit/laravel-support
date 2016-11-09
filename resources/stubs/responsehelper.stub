@@ -1,0 +1,17 @@
+<?php
+
+namespace helper_namespace;
+
+use Fuguevit\Support\Helpers\ResponseHelper as Helper;
+
+/**
+ * Class helper_class
+ * @package helper_namespace
+ */
+class helper_class extends Helper
+{
+    public static function test()
+    {
+        // TODO add function body, remember to change function name
+    }
+}
