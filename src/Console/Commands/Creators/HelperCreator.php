@@ -177,6 +177,11 @@ class HelperCreator
         return $stub;
     }
 
+    /**
+     * Put the class file to the path.
+     *
+     * @return int
+     */
     protected function createClass()
     {
         return $this->files->put($this->getPath(), $this->populateStub());
