@@ -45,7 +45,7 @@ class ResponseHelper
      */
     public static function notAjax($message = null)
     {
-        return self::error(config('json-error.request_not_ajax'), $message);
+        return self::error(config('error-code.request_not_ajax'), $message);
     }
 
     /**
@@ -56,7 +56,7 @@ class ResponseHelper
      */
     public static function formatInvalid($message = null)
     {
-        return self::error(config('json-error.invalid_format'), $message);
+        return self::error(config('error-code.invalid_format'), $message);
     }
 
     /**
@@ -67,7 +67,7 @@ class ResponseHelper
      */
     public static function dataAbsence($message = null)
     {
-        return self::error(config('json-error.data_absence'), $message);
+        return self::error(config('error-code.data_absence'), $message);
     }
     
 }
