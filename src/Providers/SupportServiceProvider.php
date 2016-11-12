@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuguevit\Support;
+namespace Fuguevit\Support\Providers;
 
 use Fuguevit\Support\Console\Commands\Creators\HelperCreator;
 use Fuguevit\Support\Console\Commands\MakeHelperCommand;
@@ -26,8 +26,8 @@ class SupportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Register binds.
-        $this->registerBinds();
+        // Register bindings.
+        $this->registerBindings();
         // Register make:helper command.
         $this->registerMakeHelperCommands();
         // Register commands.
@@ -60,11 +60,11 @@ class SupportServiceProvider extends ServiceProvider
      */
     protected function registerMakeHelperCommands()
     {
-        $this->app['command.helper.make'] = $this->app->share([
+        $this->app['command.helper.make'] = $this->app->share(
             function($app) {
                 return new MakeHelperCommand($app['HelperCreator']);
             }
-        ]);
+        );
     }
 
     /**
