@@ -69,8 +69,10 @@ class MakeHelperCommand extends Command
     {
         // Set helper.
         $helper = $arguments['helper'];
+        // Set base.
+        $base = $options['base'];
         // Create the helper.
-        if ($this->creator->create($helper)) {
+        if ($this->creator->create($helper, $base)) {
             $this->info("Create helper class success!");
         }
     }
@@ -82,6 +84,16 @@ class MakeHelperCommand extends Command
     {
         return [
             ['helper', InputArgument::REQUIRED, 'Helper name.']
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getOptions()
+    {
+        return [
+            ['base', null, InputOption::VALUE_OPTIONAL, 'Base class name.', null]
         ];
     }
 

@@ -23,6 +23,11 @@ class HelperCreator
     protected $helper;
 
     /**
+     * @var
+     */
+    protected $base;
+
+    /**
      * @param Filesystem $files
      */
     public function __construct(Filesystem $files)
@@ -47,14 +52,32 @@ class HelperCreator
     }
 
     /**
+     * @return mixed
+     */
+    public function getBase()
+    {
+        return $this->base;
+    }
+
+    /**
+     * @param $base
+     */
+    public function setBase($base)
+    {
+        $this->base = $base;
+    }
+
+    /**
      * Create the helper.
      *
      * @param $helper
+     * @param $base
      * @return null
      */
-    public function create($helper)
+    public function create($helper, $base)
     {
         $this->setHelper($helper);
+        $this->setBase($base);
         $this->createDirectory();
         return $this->createClass();
     }
@@ -98,19 +121,6 @@ class HelperCreator
     }
 
     /**
-     * Get the stripped helper name.
-     *
-     * @return mixed
-     */
-    protected function stripHelperName()
-    {
-        $helper = strtolower($this->getHelper());
-        $stripped = str_replace("helper", "", $helper);
-
-        return ucfirst($stripped);
-    }
-
-    /**
      * Get the populate data.
      *
      * @return array
@@ -148,9 +158,14 @@ class HelperCreator
     protected function getStub()
     {
         $stub_path = __DIR__.'/../../../../resources/stubs/';
+        $stub_file = "helper.stub";
+        // Get base.
+        $base = $this->getBase();
+        if($base) {
+            $stub_file = strtolower($base) . "helper.stub";
+        }
 
-        $stub = $this->files->get($stub_path."helper.stub");
-
+        $stub = $this->files->get($stub_path . $stub_file);
         return $stub;
     }
 
