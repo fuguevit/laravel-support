@@ -14,5 +14,4 @@ class CommonHelperTest extends TestCase
         $avatar = CommonHelper::gravatar('test@gmail');
         $this->assertStringStartsWith('https://www.gravatar.com/avatar/', $avatar);
     }
-
 }

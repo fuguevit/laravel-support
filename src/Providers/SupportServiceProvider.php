@@ -6,8 +6,8 @@ use Fuguevit\Support\Console\Commands\Creators\HelperCreator;
 use Fuguevit\Support\Console\Commands\MakeHelperCommand;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
 
 class SupportServiceProvider extends ServiceProvider
@@ -19,7 +19,7 @@ class SupportServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../../config/error-code.php' => config_path('error-code.php'),
-            __DIR__.'/../../config/support.php'    => config_path('support.php')
+            __DIR__.'/../../config/support.php'    => config_path('support.php'),
         ], 'config');
 
         $helperDir = config('support.helper_path');
@@ -41,7 +41,7 @@ class SupportServiceProvider extends ServiceProvider
         $this->registerMakeHelperCommands();
         // Register commands.
         $this->commands(['command.helper.make']);
-        
+
         $config_support_path = __DIR__.'/../../config/support.php';
         // Merge config.
         $this->mergeConfigFrom($config_support_path, 'support');
@@ -55,12 +55,12 @@ class SupportServiceProvider extends ServiceProvider
         // Filesystem
         $this->app->instance('FileSystem', new Filesystem());
         // Composer
-        $this->app->bind('Composer', function($app) {
+        $this->app->bind('Composer', function ($app) {
             return new Composer($app['FileSystem']);
         });
         // HelperCreator
-        $this->app->singleton('HelperCreator', function($app) {
-           return new HelperCreator($app['FileSystem']); 
+        $this->app->singleton('HelperCreator', function ($app) {
+            return new HelperCreator($app['FileSystem']);
         });
     }
 
@@ -70,7 +70,7 @@ class SupportServiceProvider extends ServiceProvider
     protected function registerMakeHelperCommands()
     {
         $this->app['command.helper.make'] = $this->app->share(
-            function($app) {
+            function ($app) {
                 return new MakeHelperCommand($app['HelperCreator']);
             }
         );
@@ -78,6 +78,7 @@ class SupportServiceProvider extends ServiceProvider
 
     /**
      * Load & Register helpers.
+     *
      * @param $directory
      */
     public static function loadHelpersFrom($directory)
@@ -97,8 +98,8 @@ class SupportServiceProvider extends ServiceProvider
         $reflector = new ReflectionClass($helperClassFQN);
         $methods = $reflector->getMethods();
         foreach ($methods as $method) {
-            $methodHelper = function(...$params) use ($method) {
-//                return $method->class::{$method->name}(...$params);
+            $methodHelper = function (...$params) use ($method) {
+                //                return $method->class::{$method->name}(...$params);
 //                return call_user_func([$method->class, $method->name], $params);
                 return $method->invoke(null, $params);
             };
@@ -108,12 +109,13 @@ class SupportServiceProvider extends ServiceProvider
 
     /**
      * @param $helper
+     *
      * @return string
      */
     public static function buildClassFQN($helper)
     {
         $helperClassName = substr($helper, 0, -4); // Remove .php at the end of the file name
-        return config('support.helper_namespace') . $helperClassName;
+        return config('support.helper_namespace').$helperClassName;
     }
 
     /**
@@ -122,8 +124,7 @@ class SupportServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'command.helper.make'
+            'command.helper.make',
         ];
     }
-
 }

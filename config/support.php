@@ -21,6 +21,6 @@ return [
     |
     */
     'helper_path' => 'app'.DIRECTORY_SEPARATOR.'Helpers',
-    
-    
+
+
 ];
