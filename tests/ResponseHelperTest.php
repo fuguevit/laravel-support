@@ -29,5 +29,4 @@ class ResponseHelperTest extends TestCase
         $expected = '{"status":"error", "message":"test error!", "error_code":620, "data":null}';
         $this->assertJsonStringEqualsJsonString($expected, $result->content());
     }
-
 }

@@ -11,7 +11,7 @@ class TestCase extends OrchestraTestCase
      */
     public function setUp()
     {
-        parent::setUp(); 
+        parent::setUp();
     }
 
     /**
@@ -20,8 +20,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app)
     {
         return [
-            'Fuguevit\Support\Providers\SupportServiceProvider'
+            'Fuguevit\Support\Providers\SupportServiceProvider',
         ];
     }
-
 }

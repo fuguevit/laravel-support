@@ -12,11 +12,11 @@ class MakeHelperCommandTest extends TestCase
     public function test_make_helper_command()
     {
         Artisan::call('make:helper', [
-            'helper' => 'Test'
+            'helper' => 'Test',
         ]);
 
         $test_path = __DIR__.'/../app';
-        $test_file = $test_path . DIRECTORY_SEPARATOR . 'Helpers/TestHelper.php';
+        $test_file = $test_path.DIRECTORY_SEPARATOR.'Helpers/TestHelper.php';
 
         $this->assertFileExists($test_file);
 
@@ -30,11 +30,11 @@ class MakeHelperCommandTest extends TestCase
     {
         Artisan::call('make:helper', [
             'helper' => 'TestBeta',
-            '--base' => 'Common'
+            '--base' => 'Common',
         ]);
 
         $test_path = __DIR__.'/../app';
-        $test_file = $test_path . DIRECTORY_SEPARATOR . 'Helpers/TestBetaHelper.php';
+        $test_file = $test_path.DIRECTORY_SEPARATOR.'Helpers/TestBetaHelper.php';
 
         $this->assertFileExists($test_file);
 

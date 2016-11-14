@@ -2,15 +2,13 @@
 
 namespace Fuguevit\Support\Console\Commands;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Fuguevit\Support\Console\Commands\Creators\HelperCreator;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class MakeHelperCommand
- *
- * @package Fuguevit\Support\Helpers\Console\Commands
+ * Class MakeHelperCommand.
  */
 class MakeHelperCommand extends Command
 {
@@ -73,7 +71,7 @@ class MakeHelperCommand extends Command
         $base = $options['base'];
         // Create the helper.
         if ($this->creator->create($helper, $base)) {
-            $this->info("Create helper class success!");
+            $this->info('Create helper class success!');
         }
     }
 
@@ -83,7 +81,7 @@ class MakeHelperCommand extends Command
     protected function getArguments()
     {
         return [
-            ['helper', InputArgument::REQUIRED, 'Helper name.']
+            ['helper', InputArgument::REQUIRED, 'Helper name.'],
         ];
     }
 
@@ -93,8 +91,7 @@ class MakeHelperCommand extends Command
     protected function getOptions()
     {
         return [
-            ['base', null, InputOption::VALUE_OPTIONAL, 'Base class name.', null]
+            ['base', null, InputOption::VALUE_OPTIONAL, 'Base class name.', null],
         ];
     }
-
 }

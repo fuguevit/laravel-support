@@ -9,6 +9,7 @@ class ResponseHelper
      *
      * @param null $data
      * @param null $message
+     *
      * @return mixed
      */
     public static function success($data = null, $message = null)
@@ -16,7 +17,7 @@ class ResponseHelper
         return response()->json([
             'status'        => 'success',
             'data'          => $data,
-            'message'       => $message
+            'message'       => $message,
         ]);
     }
 
@@ -25,6 +26,7 @@ class ResponseHelper
      *
      * @param $error_code
      * @param null $message
+     *
      * @return Response
      */
     public static function error($error_code, $message = null)
@@ -33,7 +35,7 @@ class ResponseHelper
             'status'        => 'error',
             'data'          => null,
             'error_code'    => $error_code,
-            'message'       => $message
+            'message'       => $message,
         ]);
     }
 
@@ -41,6 +43,7 @@ class ResponseHelper
      * Return request type not ajax error.
      *
      * @param null $message
+     *
      * @return Response
      */
     public static function notAjax($message = null)
@@ -52,6 +55,7 @@ class ResponseHelper
      * Return request format invalid.
      *
      * @param null $message
+     *
      * @return Response
      */
     public static function formatInvalid($message = null)
@@ -63,11 +67,11 @@ class ResponseHelper
      * Return request missing data.
      *
      * @param null $message
+     *
      * @return Response
      */
     public static function dataAbsence($message = null)
     {
         return self::error(config('error-code.data_absence'), $message);
     }
-    
 }

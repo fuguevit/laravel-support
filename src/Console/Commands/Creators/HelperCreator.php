@@ -5,9 +5,7 @@ namespace Fuguevit\Support\Console\Commands\Creators;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * Class HelperCreator
- *
- * @package Fuguevit\Support\Console\Commands\Creators
+ * Class HelperCreator.
  */
 class HelperCreator
 {
@@ -71,6 +69,7 @@ class HelperCreator
      *
      * @param $helper
      * @param $base
+     *
      * @return null
      */
     public function create($helper, $base)
@@ -78,6 +77,7 @@ class HelperCreator
         $this->setHelper($helper);
         $this->setBase($base);
         $this->createDirectory();
+
         return $this->createClass();
     }
 
@@ -116,6 +116,7 @@ class HelperCreator
         if (!strpos($helper_name, 'Helper') !== false) {
             $helper_name .= 'Helper';
         }
+
         return $helper_name;
     }
 
@@ -144,7 +145,7 @@ class HelperCreator
      */
     protected function getPath()
     {
-        $path = $this->getDirectory() . DIRECTORY_SEPARATOR . $this->getHelperName() . '.php';
+        $path = $this->getDirectory().DIRECTORY_SEPARATOR.$this->getHelperName().'.php';
 
         return $path;
     }
@@ -157,14 +158,15 @@ class HelperCreator
     protected function getStub()
     {
         $stub_path = __DIR__.'/../../../../resources/stubs/';
-        $stub_file = "helper.stub";
+        $stub_file = 'helper.stub';
         // Get base.
         $base = $this->getBase();
-        if($base) {
-            $stub_file = strtolower($base) . "helper.stub";
+        if ($base) {
+            $stub_file = strtolower($base).'helper.stub';
         }
 
-        $stub = $this->files->get($stub_path . $stub_file);
+        $stub = $this->files->get($stub_path.$stub_file);
+
         return $stub;
     }
 
