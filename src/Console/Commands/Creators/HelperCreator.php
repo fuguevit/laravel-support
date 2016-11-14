@@ -2,7 +2,6 @@
 
 namespace Fuguevit\Support\Console\Commands\Creators;
 
-use Doctrine\Common\Inflector\Inflector;
 use Illuminate\Filesystem\Filesystem;
 
 /**

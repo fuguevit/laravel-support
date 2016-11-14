@@ -7,6 +7,8 @@ use Fuguevit\Support\Console\Commands\MakeHelperCommand;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use ReflectionClass;
 
 class SupportServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,13 @@ class SupportServiceProvider extends ServiceProvider
             __DIR__.'/../../config/error-code.php' => config_path('error-code.php'),
             __DIR__.'/../../config/support.php'    => config_path('support.php')
         ], 'config');
+
+        $helperDir = config('support.helper_path');
+
+        // if is directory , load helpers
+        if (app()['FileSystem']->isDirectory($helperDir)) {
+            static::loadHelpersFrom($helperDir);
+        }
     }
 
     /**
@@ -65,6 +74,44 @@ class SupportServiceProvider extends ServiceProvider
                 return new MakeHelperCommand($app['HelperCreator']);
             }
         );
+    }
+
+    /**
+     * Load & Register helpers.
+     * @param $directory
+     */
+    public static function loadHelpersFrom($directory)
+    {
+        $helpers = app()['FileSystem']->allFiles($directory);
+        foreach ($helpers as $helper) {
+            static::registerMethods($helper);
+        }
+    }
+
+    /**
+     * @param $helper
+     */
+    public static function registerMethods($helper)
+    {
+        $helperClassFQN = static::buildClassFQN($helper);
+        $reflector = new ReflectionClass($helperClassFQN);
+        $methods = $reflector->getMethods();
+        foreach ($methods as $method) {
+            $methodHelper = function(...$params) use ($method) {
+                return $method->class::{$method->name}(...$params);
+            };
+            View::share($method->name, $methodHelper);
+        }
+    }
+
+    /**
+     * @param $helper
+     * @return string
+     */
+    public static function buildClassFQN($helper)
+    {
+        $helperClassName = substr($helper, 0, -4); // Remove .php at the end of the file name
+        return config('support.helper_namespace') . $helperClassName;
     }
 
     /**
