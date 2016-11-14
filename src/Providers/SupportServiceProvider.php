@@ -99,7 +99,8 @@ class SupportServiceProvider extends ServiceProvider
         foreach ($methods as $method) {
             $methodHelper = function(...$params) use ($method) {
 //                return $method->class::{$method->name}(...$params);
-                return call_user_func([$method->class, $method->name], ...$params);
+//                return call_user_func([$method->class, $method->name], $params);
+                return $method->invoke(null, $params);
             };
             View::share($method->name, $methodHelper);
         }
